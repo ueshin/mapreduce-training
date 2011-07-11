@@ -129,6 +129,24 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>pseudo</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>appassembler-maven-plugin</artifactId>
+						<configuration>
+							<configurationSourceDirectory>src/pseudo/config</configurationSourceDirectory>
+							<copyConfigurationDirectory>true</copyConfigurationDirectory>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>

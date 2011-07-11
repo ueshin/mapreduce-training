@@ -42,7 +42,8 @@ public class WordCount1Test {
 
     @Test
     public void test() {
-        driver.withInput(new LongWritable(0), new Text("Hello World!\n\nWorld Count."))
+        driver.withInput(new LongWritable(0), new Text("Hello World!")).withInput(new LongWritable(10L), new Text(""))
+                .withInput(new LongWritable(11L), new Text("World Count."))
                 .withOutput(new Text("Count"), new LongWritable(1)).withOutput(new Text("Hello"), new LongWritable(1))
                 .withOutput(new Text("World"), new LongWritable(2)).runTest();
     }

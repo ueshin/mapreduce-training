@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>st.happy_camper.hadoop</groupId>
 		<artifactId>hadoop-client</artifactId>
-		<version>cdh3u0-1</version>
+		<version>cdh3u0-2</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -135,15 +135,14 @@
 			<artifactId>hadoop-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-mrunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

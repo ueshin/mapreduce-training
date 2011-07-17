@@ -1,18 +1,22 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 use strict;
+use warnings;
 
 my $current = '';
 my $count;
 for my $keyvalue (<STDIN>) {
+	chomp $keyvalue;
 	my($key, $value) = split(/\t/, $keyvalue);
 	if($key eq $current) {
-		$count++;
+		$count += $value;
 	}
 	else {
 		if($current ne '') {
 			print "$current\t$count\n";
 		}
 		$current = $key;
-		$count = 1;
+		$count = $value;
 	}
 }
+
+print "$current\t$count\n";

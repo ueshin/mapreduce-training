@@ -1,8 +1,10 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 use strict;
+use warnings;
 
 for my $line (<STDIN>) {
-	for my $word (split /\W/, $line) {
+	chomp $line;
+	for my $word (split /\W+/, $line) {
 		print "$word\t1\n" if($word ne '');
 	}
 }

@@ -123,6 +123,10 @@
 							<mainClass>st.happy_camper.hadoop.mapreduce.training.wordcount1.WordCount1</mainClass>
 							<name>wordcount1</name>
 						</program>
+						<program>
+							<mainClass>st.happy_camper.hadoop.mapreduce.training.wordcount2.WordCount2</mainClass>
+							<name>wordcount2</name>
+						</program>
 					</programs>
 				</configuration>
 			</plugin>

@@ -24,7 +24,7 @@ import org.junit.Test;
 /**
  * @author ueshin
  */
-public class WordCount1MapperTest extends WordCount1Mapper {
+public class WordCount1MapperTest {
 
     private MapDriver<LongWritable, Text, Text, LongWritable> driver;
 

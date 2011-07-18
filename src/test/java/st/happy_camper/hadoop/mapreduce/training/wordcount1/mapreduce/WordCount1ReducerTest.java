@@ -26,7 +26,7 @@ import org.junit.Test;
 /**
  * @author ueshin
  */
-public class WordCount1ReducerTest extends WordCount1Reducer {
+public class WordCount1ReducerTest {
 
     private ReduceDriver<Text, LongWritable, Text, LongWritable> driver;
 

@@ -127,6 +127,10 @@
 							<mainClass>st.happy_camper.hadoop.mapreduce.training.wordcount2.WordCount2</mainClass>
 							<name>wordcount2</name>
 						</program>
+						<program>
+							<mainClass>st.happy_camper.hadoop.mapreduce.training.charcount1.CharCount1</mainClass>
+							<name>charcount1</name>
+						</program>
 					</programs>
 				</configuration>
 			</plugin>

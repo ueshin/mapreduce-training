@@ -15,6 +15,8 @@
  */
 package st.happy_camper.hadoop.mapreduce.training.wordcount3;
 
+import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -39,18 +41,25 @@ import st.happy_camper.hadoop.mapreduce.training.wordcount3.mapreduce.WordCount3
  */
 public class WordCount3 extends Configured implements Tool {
 
-    /*
-     * (non-Javadoc)
-     * @see org.apache.hadoop.util.Tool#run(java.lang.String[])
+    /**
+     * 
      */
-    @Override
-    public int run(String[] args) throws Exception {
-        Path[] inputPaths = new Path[args.length - 1];
-        for(int i = 0; i < args.length - 1; i++) {
-            inputPaths[i] = new Path(args[i]);
-        }
-        Path outputDir = new Path(args[args.length - 1]);
+    public WordCount3() {
+    }
 
+    /**
+     * @param conf
+     */
+    public WordCount3(Configuration conf) {
+        super(conf);
+    }
+
+    /**
+     * @param args
+     * @return
+     * @throws IOException
+     */
+    public Job createJob(Path[] inputPaths, Path outputDir) throws IOException {
         Job job = new Job(getConf(), "WordCount3");
         job.setJarByClass(getClass());
 
@@ -72,7 +81,22 @@ public class WordCount3 extends Configured implements Tool {
         job.setOutputFormatClass(TextOutputFormat.class);
         FileOutputFormat.setOutputPath(job, outputDir);
 
-        return job.waitForCompletion(true) ? 0 : 1;
+        return job;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.apache.hadoop.util.Tool#run(java.lang.String[])
+     */
+    @Override
+    public int run(String[] args) throws Exception {
+        Path[] inputPaths = new Path[args.length - 1];
+        for(int i = 0; i < args.length - 1; i++) {
+            inputPaths[i] = new Path(args[i]);
+        }
+        Path outputDir = new Path(args[args.length - 1]);
+
+        return createJob(inputPaths, outputDir).waitForCompletion(true) ? 0 : 1;
     }
 
     /**

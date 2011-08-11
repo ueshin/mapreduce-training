@@ -17,17 +17,16 @@ package st.happy_camper.hadoop.mapreduce.training.wordcount3.mapreduce;
 
 import java.io.IOException;
 
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3MapOutputKeyWritable;
 import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3OutputValueWritable;
 
 /**
  * @author ueshin
  */
-public class WordCount3Reducer extends
-        Reducer<WordCount3MapOutputKeyWritable, Text, Text, WordCount3OutputValueWritable> {
+public class WordCount3Reducer extends Reducer<Text, LongWritable, Text, WordCount3OutputValueWritable> {
 
     private final Text keyout = new Text();
 
@@ -39,17 +38,17 @@ public class WordCount3Reducer extends
      * java.lang.Iterable, org.apache.hadoop.mapreduce.Reducer.Context)
      */
     @Override
-    protected void reduce(WordCount3MapOutputKeyWritable key, Iterable<Text> values, Context context)
-            throws IOException, InterruptedException {
-        keyout.set(new String(new int[] { key.codePoint }, 0, 1));
+    protected void reduce(Text key, Iterable<LongWritable> values, Context context) throws IOException,
+            InterruptedException {
+        keyout.set(new String(new int[] { key.charAt(0) }, 0, 1));
 
         long words = 0L;
         long count = 0L;
         String current = null;
-        for(Text text : values) {
-            count++;
+        for(LongWritable value : values) {
+            count += value.get();
 
-            String word = text.toString();
+            String word = key.toString();
             if(!word.equals(current)) {
                 words++;
                 current = word;

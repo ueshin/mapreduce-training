@@ -21,16 +21,14 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3MapOutputKeyWritable;
-
 /**
  * @author ueshin
  */
-public class WordCount3Mapper extends Mapper<LongWritable, Text, WordCount3MapOutputKeyWritable, Text> {
+public class WordCount3Mapper extends Mapper<LongWritable, Text, Text, LongWritable> {
 
-    private final WordCount3MapOutputKeyWritable keyout = new WordCount3MapOutputKeyWritable();
+    private final Text keyout = new Text();
 
-    private final Text valueout = new Text();
+    private final LongWritable valueout = new LongWritable(1L);
 
     /*
      * (non-Javadoc)
@@ -41,9 +39,7 @@ public class WordCount3Mapper extends Mapper<LongWritable, Text, WordCount3MapOu
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         for(String word : value.toString().toLowerCase().split("\\W+")) {
             if(!word.equals("")) {
-                keyout.codePoint = word.codePointAt(0);
-                keyout.word = word;
-                valueout.set(word);
+                keyout.set(word);
                 context.write(keyout, valueout);
             }
         }

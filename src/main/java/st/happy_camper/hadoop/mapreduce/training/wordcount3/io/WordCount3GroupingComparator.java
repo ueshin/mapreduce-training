@@ -15,6 +15,7 @@
  */
 package st.happy_camper.hadoop.mapreduce.training.wordcount3.io;
 
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 
@@ -28,7 +29,7 @@ public class WordCount3GroupingComparator extends WritableComparator {
      * @param createInstances
      */
     protected WordCount3GroupingComparator() {
-        super(WordCount3MapOutputKeyWritable.class, true);
+        super(Text.class, true);
     }
 
     /*
@@ -40,8 +41,8 @@ public class WordCount3GroupingComparator extends WritableComparator {
     @Override
     @SuppressWarnings("rawtypes")
     public int compare(WritableComparable a, WritableComparable b) {
-        int codePointA = ((WordCount3MapOutputKeyWritable) a).codePoint;
-        int codePointB = ((WordCount3MapOutputKeyWritable) b).codePoint;
+        int codePointA = ((Text) a).charAt(0);
+        int codePointB = ((Text) b).charAt(0);
         return Integer.valueOf(codePointA).compareTo(codePointB);
     }
 

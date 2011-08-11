@@ -20,17 +20,18 @@ import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.hadoop.mapreduce.lib.reduce.LongSumReducer;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3GroupingComparator;
-import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3MapOutputKeyWritable;
 import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3OutputValueWritable;
 import st.happy_camper.hadoop.mapreduce.training.wordcount3.mapreduce.WordCount3Mapper;
 import st.happy_camper.hadoop.mapreduce.training.wordcount3.mapreduce.WordCount3Partitioner;
@@ -67,12 +68,13 @@ public class WordCount3 extends Configured implements Tool {
         FileInputFormat.setInputPaths(job, inputPaths);
 
         job.setMapperClass(WordCount3Mapper.class);
-        job.setMapOutputKeyClass(WordCount3MapOutputKeyWritable.class);
-        job.setMapOutputValueClass(Text.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
 
         job.setPartitionerClass(WordCount3Partitioner.class);
-        job.setGroupingComparatorClass(WordCount3GroupingComparator.class);
+        job.setCombinerClass(LongSumReducer.class);
 
+        job.setGroupingComparatorClass(WordCount3GroupingComparator.class);
         job.setReducerClass(WordCount3Reducer.class);
 
         job.setOutputKeyClass(Text.class);

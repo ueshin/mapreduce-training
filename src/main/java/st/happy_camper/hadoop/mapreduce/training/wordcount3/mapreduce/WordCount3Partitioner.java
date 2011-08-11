@@ -15,15 +15,14 @@
  */
 package st.happy_camper.hadoop.mapreduce.training.wordcount3.mapreduce;
 
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
-
-import st.happy_camper.hadoop.mapreduce.training.wordcount3.io.WordCount3MapOutputKeyWritable;
 
 /**
  * @author ueshin
  */
-public class WordCount3Partitioner extends Partitioner<WordCount3MapOutputKeyWritable, Text> {
+public class WordCount3Partitioner extends Partitioner<Text, LongWritable> {
 
     /*
      * (non-Javadoc)
@@ -32,8 +31,8 @@ public class WordCount3Partitioner extends Partitioner<WordCount3MapOutputKeyWri
      * java.lang.Object, int)
      */
     @Override
-    public int getPartition(WordCount3MapOutputKeyWritable key, Text value, int numPartitions) {
-        return key.codePoint % numPartitions;
+    public int getPartition(Text key, LongWritable value, int numPartitions) {
+        return key.charAt(0) % numPartitions;
     }
 
 }

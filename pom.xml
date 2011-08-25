@@ -8,7 +8,6 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>st.happy_camper.hadoop</groupId>
 	<artifactId>mapreduce-training</artifactId>
 	<packaging>jar</packaging>
 	<name>mapreduce-training</name>
@@ -142,6 +141,10 @@
 						<program>
 							<mainClass>st.happy_camper.hadoop.mapreduce.training.reducesidejoin.ReduceSideJoin</mainClass>
 							<name>reducesidejoin</name>
+						</program>
+						<program>
+							<mainClass>st.happy_camper.hadoop.mapreduce.training.mapsidejoin.MapSideJoin</mainClass>
+							<name>mapsidejoin</name>
 						</program>
 					</programs>
 				</configuration>

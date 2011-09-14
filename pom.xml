@@ -150,6 +150,10 @@
 							<mainClass>st.happy_camper.hadoop.mapreduce.training.semijoin.SemiJoin</mainClass>
 							<name>semijoin</name>
 						</program>
+						<program>
+							<mainClass>st.happy_camper.hadoop.mapreduce.training.combined.CombinedMapReduce</mainClass>
+							<name>combined</name>
+						</program>
 					</programs>
 				</configuration>
 			</plugin>
